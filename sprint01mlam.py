@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-df = pd.read_csv("World Energy Consumption.csv")
+df = pd.read_csv("/content/World_Energy_Consumption.csv")
 
 
 freq_abs = df["year"].value_counts().sort_index()
@@ -15,6 +15,7 @@ tabela = pd.DataFrame({
     "Acumulada": freq_acum
 })
 
+print("=== Tabela 1: year (Discreta) ===")
 print(tabela)
 
 # Insight 1:
@@ -27,19 +28,22 @@ print(tabela)
 
 #============================================================================================================================================
 
-df2 = pd.read_csv("World Energy Consumption.csv")
+gdp_valido = df["gdp"].dropna()
 
-freq_abs2 = df["year"].value_counts().sort_index()
-freq_rel2 = (df["year"].value_counts(normalize=True).sort_index()) * 100
-freq_acum2 = freq_abs.cumsum()
+# Divide em 10 faixas (intervalos de classe) com pd.cut
+tabela_continua = pd.cut(gdp_valido, bins=10).value_counts().sort_index()
+freq_abs2 = tabela_continua
+freq_rel2 = (tabela_continua / tabela_continua.sum() * 100).round(2)
+freq_acum2 = freq_abs2.cumsum()
 
-tabela2 = pd.DataFrame({
-    "Frequência Absoluta": freq_abs,
-    "Frequência Relativa (%)": freq_rel.round(2),
-    "Frequência Acumulada": freq_acum
+tabela_gdp = pd.DataFrame({
+    "Absoluta": freq_abs2,
+    "Relativa (%)": freq_rel2,
+    "Acumulada": freq_acum2
 })
 
-print(tabela2)
+print("\n=== Tabela 2: gdp (Contínua) ===")
+print(tabela_gdp)
 
 # Insight 1:
 # Países com maiores valores de PIB tendem a apresentar maior infraestrutura energética e maior potencial de adoção de veículos elétricos,
