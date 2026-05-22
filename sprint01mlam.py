@@ -1,3 +1,10 @@
+# Anna Karla Rorato Albino - RM: 569604
+# Arthur Araujo Massarioli - RM: 573308
+# Beatriz da Siva Araújo - RM: 570619
+# Daniel Alejandro Pupo Martínez - RM: 573075
+# Victor Hugo Lavaqui - RM: 573838
+# Wendel Pedro Rezende - RM: 573126
+
 import pandas as pd
 
 
